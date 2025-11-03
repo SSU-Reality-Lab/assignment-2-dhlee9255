@@ -137,7 +137,7 @@ class HarrisKeypointDetector(KeypointDetector):
         localMax = ndimage.maximum_filter(harrisImage, size=7)
         destImage = (harrisImage == localMax)
         # TODO-BLOCK-END
-
+        #7*7로 만든이유가 해리스코너가 한쪽에 몰리는 경우가 있어서??
         return destImage
 
     def detectKeypoints(self, image):
@@ -177,7 +177,8 @@ class HarrisKeypointDetector(KeypointDetector):
                     continue
 
                 f = cv2.KeyPoint()
-
+                # 왜 흑백으로 했는가가 중요 
+                # 3채널에서하면 기울기가 급격하게 발생해서 ... 완화  
                 # TODO 3: Fill in feature f with location and orientation
                 # data here. Set f.size to 10, f.pt to the (x,y) coordinate,
                 # f.angle to the orientation in degrees and f.response to
